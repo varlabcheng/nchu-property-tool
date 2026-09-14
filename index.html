@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歷年盤點 統整系統</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 引入 SheetJS 處理 Excel/CSV 解析 -->
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>歷年盤點 統整系統</h1>
+            <p>自動比對並合併年度財產與非消耗品盤點表，保留舊版自訂備註與檢查狀態。</p>
+        </header>
+        
+        <main>
+            <div class="upload-section">
+                <div class="file-input-group">
+                    <label for="newFile">1. 載入今年度盤點表 (新版公版)</label>
+                    <input type="file" id="newFile" accept=".csv, .xlsx, .xls">
+                    <select id="newSheetSelect" class="sheet-selector" style="display:none;"></select>
+                </div>
+                
+                <div class="file-input-group">
+                    <label for="oldFile">2. 載入上一期盤點 (舊版紀錄)</label>
+                    <input type="file" id="oldFile" accept=".csv, .xlsx, .xls">
+                    <select id="oldSheetSelect" class="sheet-selector" style="display:none;"></select>
+                </div>
+            </div>
+
+            <div class="action-section">
+                <input type="text" id="exportFileName" placeholder="請輸入欲儲存的檔名 (如: 2026非消耗品盤點)" class="export-input">
+                <button id="mergeBtn" class="primary-btn">執行合併 (Merge)</button>
+            </div>
+
+            <hr class="section-divider">
+
+            <div class="upload-section label-section">
+                <h2>3. 標籤補發申請單 (Word 匯出)</h2>
+                <div class="file-input-group">
+                    <label for="labelFile">載入已盤點完畢之 Excel</label>
+                    <input type="file" id="labelFile" accept=".csv, .xlsx, .xls">
+                    <select id="labelSheetSelect" class="sheet-selector" style="display:none;"></select>
+                </div>
+                <div class="label-settings">
+                    <div class="setting-group">
+                        <label for="labelColumn">判斷欄位 (預設: 標籤)</label>
+                        <input type="text" id="labelColumn" value="標籤" class="export-input">
+                    </div>
+                    <div class="setting-group">
+                        <label for="labelValue">判斷值 (留空表示有任何文字即匯出)</label>
+                        <input type="text" id="labelValue" placeholder="(例如: V 或 是)" class="export-input">
+                    </div>
+                </div>
+                <div class="action-section">
+                    <button id="exportWordBtn" class="secondary-btn">匯出標籤補發申請單</button>
+                </div>
+            </div>
+
+            <div id="status" class="status" style="display: none;"></div>
+        </main>
+        
+        <footer>
+            <p>純前端處理，資料不會上傳至伺服器，確保公司資安。<br>支援格式：XLSX, CSV。匯出格式：原生 XLSX。</p>
+        </footer>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
