@@ -26,7 +26,7 @@
 3. 上傳 Excel / CSV 檔案並操作
 
 ```bash
-git clone https://github.com/idcllab702/nchu-property-tool.git
+git clone https://github.com/varlabcheng/nchu-property-tool.git
 cd asset-inventory-merger
 # 直接用瀏覽器開啟 index.html 即可
 ```
